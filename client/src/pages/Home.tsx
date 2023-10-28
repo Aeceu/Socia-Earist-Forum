@@ -46,7 +46,7 @@ export default function Home() {
   }, [AllPosts, category]);
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full h-full flex flex-col items-center">
       {<CreatePost userID={UserData?._id} />}
       <div className="w-full p-4 flex items-center gap-2 border-y overflow-y-hidden overflow-x-scroll scroll-design">
         <Badge
@@ -69,7 +69,7 @@ export default function Home() {
           </Badge>
         ))}
       </div>
-      <div className="w-full h-screen md:p-0 pb-96 overflow-y-scroll flex flex-col  ">
+      <div className="w-full h-screen md:p-0 pb-[100px] overflow-y-scroll flex flex-col-reverse  ">
         {!category ? (
           AllPosts &&
           AllPosts.map((post, i) => (
