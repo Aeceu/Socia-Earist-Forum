@@ -14,6 +14,14 @@ connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
+const corsConfig = {
+  origin: true,
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsConfig));
+app.options("*", cors(corsConfig));
 app.use(
   cors({
     origin: ["https://socia-earist-forum.vercel.app"],
