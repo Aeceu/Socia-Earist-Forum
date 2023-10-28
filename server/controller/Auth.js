@@ -36,6 +36,8 @@ const HandleLogin = async (req, res) => {
       maxAge: 1000 * 60 * 30 * 1000,
       httpOnly: true,
       secure: true,
+      sameSite: "none",
+      path: "/",
     });
     return res.status(200).json({
       success: true,

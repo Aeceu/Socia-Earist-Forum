@@ -10,6 +10,7 @@ import { ProtectedRoutes, PublicRoutes } from "./lib/ProtectedRoutes";
 
 const App = () => {
   axios.defaults.baseURL = "https://socia-earist-forum-backend.vercel.app";
+  axios.get(axios.defaults.baseURL);
   axios.defaults.withCredentials = true;
   return (
     <Routes>
