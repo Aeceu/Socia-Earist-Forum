@@ -37,7 +37,7 @@ export default function EditProfile() {
     }
   }, [user]);
 
-  const baseUrl = "http://localhost:4200";
+  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
   const handleUpdate = async () => {
     try {

@@ -5,7 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { LucideLoader2 } from "lucide-react";
 import AuthStore from "../state/AuthStore";
 
-const baseUrl = "http://localhost:4200";
+const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
 export default function LoginForm() {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { LucideLoader2 } from "lucide-react";
 
-const baseUrl = "http://localhost:4200";
+const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
 export default function SignUpForm() {
   const [loading, setLoading] = useState(false);

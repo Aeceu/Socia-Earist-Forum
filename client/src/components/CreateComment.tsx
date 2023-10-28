@@ -17,7 +17,7 @@ export default function CreateComment({ textareaRef, userID, postID }: Props) {
   AutoResize(textareaRef.current, comment);
   const getAllComments = DataStore((state) => state.getAllComments);
 
-  const baseUrl = "http://localhost:4200";
+  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
   const handleAddComment = async () => {
     try {
       setLoading(true);

@@ -44,7 +44,7 @@ export default function EditPopOver() {
     }
   }, [post]);
 
-  const baseUrl = "http://localhost:4200";
+  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
   const handleUpdate = async () => {
     try {

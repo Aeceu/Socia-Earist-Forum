@@ -44,7 +44,7 @@ type Props = {
   getUserData: () => Promise<void>;
 };
 
-const baseUrl = "http://localhost:4200";
+const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
 export const DataStore = create<Props>()((set, get) => ({
   UserData: null,

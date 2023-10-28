@@ -9,7 +9,7 @@ import Register from "./pages/Register";
 import { ProtectedRoutes, PublicRoutes } from "./lib/ProtectedRoutes";
 
 const App = () => {
-  axios.defaults.baseURL = "http://localhost:4200";
+  axios.defaults.baseURL = "https://socia-earist-forum-backend.vercel.app";
   axios.defaults.withCredentials = true;
   return (
     <Routes>

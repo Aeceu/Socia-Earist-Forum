@@ -12,7 +12,7 @@ export default function LogoutBtn({ minimize }: { minimize: boolean }) {
   const handleLogout = async () => {
     try {
       setLoading(true);
-      const baseUrl = "http://localhost:4200";
+      const baseUrl = "https://socia-earist-forum-backend.vercel.app";
       await axios.get(`${baseUrl}/logout`);
       setID("");
       setToken("");

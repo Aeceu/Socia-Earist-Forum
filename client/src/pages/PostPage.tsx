@@ -33,7 +33,7 @@ export default function PostPage() {
   const postcomments = DataStore((state) => state.postcomments);
   const getAllComments = DataStore((state) => state.getAllComments);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const baseUrl = "http://localhost:4200";
+  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
   const handleDelete = async () => {
     try {
       setLoading(true);
