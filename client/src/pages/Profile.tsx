@@ -130,7 +130,7 @@ export default function Profile() {
           </span>
         </span>
       </div>
-      <div className="w-full p-4 flex items-center gap-2 border-b ">
+      <div className="w-full p-4 flex items-center gap-2 border-y overflow-y-hidden overflow-x-scroll scroll-design">
         <Badge
           onClick={() => setCategory("")}
           className={`cursor-pointer ${
