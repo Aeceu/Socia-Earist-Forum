@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["socia-earist-forum.vercel.app", "http://localhost:5173"],
+    origin: ["https://socia-earist-forum.vercel.app"],
     credentials: true, // This allows cookies to be sent along with the request
   })
 );
