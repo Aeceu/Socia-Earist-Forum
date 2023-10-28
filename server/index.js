@@ -12,22 +12,15 @@ const app = express();
 
 connectDB();
 
-app.use(express.json());
-app.use(cookieParser());
 const corsConfig = {
   origin: true,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-
+app.use(express.json());
 app.use(cors(corsConfig));
+app.use(cookieParser());
 app.options("*", cors(corsConfig));
-app.use(
-  cors({
-    origin: ["https://socia-earist-forum.vercel.app"],
-    credentials: true, // This allows cookies to be sent along with the request
-  })
-);
 
 app.use("/", UserRouter);
 app.use("/", PostRouter);
