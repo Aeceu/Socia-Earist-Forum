@@ -151,7 +151,7 @@ export default function Profile() {
           </Badge>
         ))}
       </div>
-      <div className="w-full min-h-screen  overflow-y-scroll flex flex-col">
+      <div className="w-full max-h-screen  overflow-y-scroll flex flex-col">
         {!category ? (
           UserPosts &&
           UserPosts.map((post, i) => (

@@ -65,7 +65,7 @@ export default function PostPage() {
       getAllComments(post?._id);
       fetchLikes();
     }
-  }, [UserData?._id, post]);
+  }, []);
 
   const fetchLikes = async () => {
     try {
