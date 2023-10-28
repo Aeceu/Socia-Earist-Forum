@@ -69,7 +69,7 @@ export default function Home() {
           </Badge>
         ))}
       </div>
-      <div className="w-full h-screen md:p-0 pb-[100px] overflow-y-scroll flex flex-col-reverse  ">
+      <div className="w-full h-screen md:p-0 pb-[250px] overflow-y-scroll flex flex-col-reverse  ">
         {!category ? (
           AllPosts &&
           AllPosts.map((post, i) => (
