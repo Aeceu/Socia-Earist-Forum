@@ -23,7 +23,6 @@ app.use(express.json());
 app.use(cors(corsConfig));
 app.use(cookieParser());
 app.options("*", cors(corsConfig));
-
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use("/", UserRouter);
