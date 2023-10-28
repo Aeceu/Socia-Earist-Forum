@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["socia-earist-forum.vercel.app", "http://localhost:5173"],
     credentials: true, // This allows cookies to be sent along with the request
   })
 );
@@ -24,7 +24,8 @@ app.use(
 app.use("/", UserRouter);
 app.use("/", PostRouter);
 app.use("/", CommentRouter);
+
 const PORT = 4200;
 app.listen(PORT, () => {
-  console.log("Server opened on http://localhost:4200 !");
+  console.log(`Server opened at PORT:${PORT} !`);
 });
