@@ -5,8 +5,8 @@ const UserRouter = require("./routers/UserRoute");
 const PostRouter = require("./routers/PostRoute");
 const CommentRouter = require("./routers/CommentRouter");
 const dotenv = require("dotenv");
-import helmet from "helmet";
-import morgan from "morgan";
+const helmet = require("helmet");
+``;
 const cookieParser = require("cookie-parser");
 dotenv.config();
 

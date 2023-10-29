@@ -92,19 +92,19 @@ export default function CreatePost({ userID }: Props) {
   };
 
   return (
-    <div className="w-full flex md:justify-center py-2 md:py-4 md:px-0 px-2 ">
+    <div className="w-full flex   ">
       <div
         ref={ref}
-        className="w-full md:w-1/2 flex flex-col gap-2 items-center border-2 bg-yellow-300 border-red-500 rounded-md  px-1 py-1.5 shadow-lg"
+        className="w-full  flex flex-col gap-2 items-center   py-2 "
       >
         {toggle && (
           <input
             onChange={(e) => setData({ ...data, title: e.target.value })}
-            className="outline-none w-full bg-inherit placeholder:text-stone-600"
-            placeholder="Title"
+            className="outline-none w-full bg-inherit placeholder:text-stone-600 p-2"
+            placeholder="title"
           />
         )}
-        <span className="flex gap-2 items-center bg-inherit w-full">
+        <span className="flex gap-2 items-center bg-inherit w-full p-2">
           {!toggle && <LucidePenLine className="text-red-500" />}
           <textarea
             value={data.description}
@@ -112,19 +112,19 @@ export default function CreatePost({ userID }: Props) {
             ref={textareaRef}
             rows={1}
             cols={1}
-            className="resize-none outline-none w-full bg-inherit placeholder:text-stone-600"
-            placeholder="create post..."
+            className="resize-none outline-none w-full bg-inherit placeholder:text-stone-600 "
+            placeholder={`${toggle ? "description" : "create post..."}`}
           />
         </span>
         {toggle && (
-          <div className="w-full flex justify-between gap-2 text-sm ">
+          <div className="w-full flex justify-between gap-2 text-sm p-2">
             <Select>
               <SelectTrigger className="z-100 outline-none w-[100px] h-[25px] bg-inherit border-red-500 text-red-500">
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent
                 ref={ref2}
-                className="bg-yellow-300 w-[70px] outline-none border-red-500"
+                className=" w-[70px] outline-none border-red-500"
               >
                 {categories.map((cat, i) => (
                   <SelectItem

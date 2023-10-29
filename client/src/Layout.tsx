@@ -6,7 +6,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <div className="flex md:h-[calc(100vh-80px)] h-full md:flex-row flex-col-reverse">
+      <div className="flex h-[calc(100vh-80px)]  md:flex-row flex-col-reverse">
         <SideBar />
         <Outlet />
       </div>

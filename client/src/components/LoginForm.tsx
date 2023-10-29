@@ -2,12 +2,19 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
-import { LucideLoader2 } from "lucide-react";
+import {
+  LucideEye,
+  LucideEyeOff,
+  LucideLoader2,
+  LucideMail,
+  LucideUserCircle2,
+} from "lucide-react";
 import AuthStore from "../state/AuthStore";
 
 const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
 export default function LoginForm() {
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   const setToken = AuthStore((state) => state.setToken);
   const setID = AuthStore((state) => state.setID);
@@ -43,58 +50,74 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full md:w-auto p-4  flex flex-col text-white gap-2 bg-gray-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-30 border border-gray-100"
+      className="z-50 w-max   p-4  flex flex-col gap-2 rounded-md shadow-2xl border bg-white "
     >
-      <h1 className="text-center text-4xl text-yellow-400 font-bold drop-shadow-[0px_1.5px_1.5px_rgba(177,1,1,.8)]">
+      <h1 className="text-center text-4xl font-bold text-[rgb(177,1,1)] drop-shadow-[3px_3px_0px_rgba(250,204,21,.8)]">
         Login your account
       </h1>
       <span className="flex flex-col ">
         <label
           htmlFor="studentID"
-          className="text-sm text-yellow-400 font-bold drop-shadow-[0px_1.5px_1.5px_rgba(177,1,1,.8)] "
+          className="text-sm font-bold text-red-600
+          "
         >
           Student Number
         </label>
-        <input
-          value={data.studentID}
-          onChange={(e) => setData({ ...data, studentID: e.target.value })}
-          id="studentID"
-          type="text"
-          className="bg-inherit rounded-md px-1 py-1.5  border outline-none placeholder:text-white/70"
-          placeholder="student number"
-        />
+        <span className="bg-inherit rounded-md px-1 py-1.5 border shadow-inner outline-none flex items-center justify-between">
+          <input
+            value={data.studentID}
+            onChange={(e) => setData({ ...data, studentID: e.target.value })}
+            id="studentID"
+            type="text"
+            className="w-full outline-none placeholder:text-[14px]"
+            placeholder="student number"
+          />
+          <LucideUserCircle2 size={"1.3rem"} />
+        </span>
       </span>
       <span className="flex flex-col ">
-        <label
-          htmlFor="email"
-          className="text-sm text-yellow-400 font-bold drop-shadow-[0px_1.5px_1.5px_rgba(177,1,1,.8)] "
-        >
+        <label htmlFor="email" className="text-sm font-bold text-red-600  ">
           Email
         </label>
-        <input
-          value={data.email}
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-          id="email"
-          type="text"
-          className="bg-inherit rounded-md px-1 py-1.5  border outline-none placeholder:text-white/70"
-          placeholder="email"
-        />
+        <span className="bg-inherit rounded-md px-1 py-1.5 border shadow-inner outline-none flex items-center justify-between">
+          <input
+            value={data.email}
+            onChange={(e) => setData({ ...data, email: e.target.value })}
+            id="email"
+            type="text"
+            className="w-full outline-none placeholder:text-[14px]"
+            placeholder="email"
+          />
+          <LucideMail size={"1.3rem"} />
+        </span>
       </span>
       <span className="flex flex-col ">
-        <label
-          htmlFor="password"
-          className="text-sm text-yellow-400 font-bold drop-shadow-[0px_1.5px_1.5px_rgba(177,1,1,.8)]"
-        >
+        <label htmlFor="password" className="text-sm font-bold text-red-600 ">
           Password
         </label>
-        <input
-          value={data.password}
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-          id="password"
-          type="password"
-          className="bg-inherit rounded-md px-1 py-1.5  border outline-none placeholder:text-white/70"
-          placeholder="password"
-        />
+        <span className="flex items-center justify-between bg-inherit rounded-md px-1 py-1.5 border shadow-inner outline-none">
+          <input
+            value={data.password}
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+            id="password"
+            type={show ? "text" : "password"}
+            className="outline-none w-full placeholder:text-[14px]"
+            placeholder="password"
+          />
+          {show ? (
+            <LucideEye
+              size={"1.3rem"}
+              className="hover:scale-110 transition-all duration-300 cursor-pointer"
+              onClick={() => setShow((prev) => !prev)}
+            />
+          ) : (
+            <LucideEyeOff
+              size={"1.3rem"}
+              className="hover:scale-110 transition-all duration-300 cursor-pointer"
+              onClick={() => setShow((prev) => !prev)}
+            />
+          )}
+        </span>
       </span>
       <button
         disabled={loading}
@@ -112,7 +135,7 @@ export default function LoginForm() {
       </button>
       <span className="w-full flex items-center gap-2">
         <p className="border-b w-full" />
-        <p className="text-yellow-400 font-bold drop-shadow-[0px_1.5px_1.5px_rgba(177,1,1,.8)]">
+        <p className="text-[rgb(177,1,1)] drop-shadow-[0px_1px_1px_rgba(250,204,21,.8)] font-bold">
           or
         </p>
         <p className="border-b w-full" />

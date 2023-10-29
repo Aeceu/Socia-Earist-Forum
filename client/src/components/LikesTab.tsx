@@ -20,12 +20,10 @@ export default function LikesTab({
 
   const handleLike = async () => {
     try {
-      const res = await axios.post(`${baseUrl}/like/${id}`, {
+      await axios.post(`${baseUrl}/like/${id}`, {
         likerID: UserData?._id,
       });
-      console.log(res.data);
 
-      // Fetch updated likes and like count
       fetchLikes();
     } catch (error) {
       console.log(error);
@@ -34,7 +32,7 @@ export default function LikesTab({
   return (
     <span
       onClick={handleLike}
-      className={`hover:text-red-500 flex items-center gap-1 hover:scale-125  cursor-pointer transition-all duration-300" ${
+      className={`hover:text-red-500 flex items-center gap-1 cursor-pointer " ${
         isliked ? "text-red-500" : "text-black"
       }`}
     >

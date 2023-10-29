@@ -22,9 +22,10 @@ type PostDetails = {
 type Props = {
   data: PostDetails;
   setCategory: Dispatch<SetStateAction<string>>;
+  userID?: string;
 };
 
-export default function PostCard({ data, setCategory }: Props) {
+export default function PostCard({ data, setCategory, userID }: Props) {
   return (
     <div className=" relative  border-b p-4 ">
       <span className="flex items-center gap-2 text-black/70 text-[12px]">
@@ -50,9 +51,15 @@ export default function PostCard({ data, setCategory }: Props) {
           {data.description}
         </p>
       </Link>
-      <span className={`w-max  flex items-center gap-1 px-2`}>
+      <span
+        className={`w-max  flex items-center gap-1 px-2 ${
+          data.likes.some((like) => like === userID)
+            ? "text-red-500"
+            : "text-black"
+        }`}
+      >
         <h1 className="text-sm">{data.likes.length}</h1>
-        <LucideHeart size="1rem" className=" " />
+        <LucideHeart size="1rem" />
       </span>
     </div>
   );

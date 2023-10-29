@@ -21,13 +21,11 @@ export default function CreateComment({ textareaRef, userID, postID }: Props) {
   const handleAddComment = async () => {
     try {
       setLoading(true);
-      const res = await axios.post(`${baseUrl}/comment`, {
+      await axios.post(`${baseUrl}/comment`, {
         comment: comment,
         postID: postID,
         userID: userID,
       });
-      console.log(res.data);
-
       getAllComments(postID);
     } catch (error) {
       console.error(error);

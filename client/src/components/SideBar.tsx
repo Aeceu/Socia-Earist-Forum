@@ -43,10 +43,8 @@ export default function SideBar() {
         <Link
           to="/"
           className={`${minimize && "justify-center"} ${
-            !id
-              ? "bg-yellow-300 border-red-500 text-black"
-              : "bg-red-500 border-yellow-300 "
-          } flex gap-2 items-center px-2 py-1.5  rounded-md  border-2 `}
+            !id ? "border-2 border-black text-black " : "bg-red-500 "
+          } flex gap-2 items-center px-2 py-1.5  rounded-md shadow-xl `}
         >
           <span>
             <LucideHome />
@@ -57,9 +55,9 @@ export default function SideBar() {
           to={`/profile/${UserData?._id}`}
           className={`${minimize && "justify-center"} ${
             id === `${UserData?._id}`
-              ? "bg-yellow-300 border-red-500 text-black "
-              : "bg-red-500 border-yellow-300 "
-          } flex gap-2 items-center px-2 py-1.5  rounded-md  border-2 `}
+              ? "border-2 border-black text-black "
+              : "bg-red-500 "
+          } flex gap-2 items-center px-2 py-1.5  rounded-md shadow-xl `}
         >
           <span>
             <LucideUser />

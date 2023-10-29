@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Badge } from "../components/ui/badge";
 import { DataStore } from "../state/DataStore";
 import { useState, useEffect, useRef } from "react";
 import {
+  Loader2,
   LucideChevronLeftCircle,
   LucideLoader2,
   LucideMessageCircle,
@@ -50,22 +52,26 @@ export default function PostPage() {
   useEffect(() => {
     try {
       if (id) {
-        setLoading(true);
         getPost(id);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }, [getPost, id]);
+
+  useEffect(() => {
+    try {
+      setLoading(true);
+      if ((UserData?._id, post?._id)) {
+        getAllComments(post?._id);
+        fetchLikes();
       }
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
     }
-  }, [getPost, id]);
-
-  useEffect(() => {
-    if ((UserData?._id, post?._id)) {
-      getAllComments(post?._id);
-      fetchLikes();
-    }
-  }, []);
+  }, [UserData?._id, getAllComments, post?._id]);
 
   const fetchLikes = async () => {
     try {
@@ -85,7 +91,7 @@ export default function PostPage() {
   };
 
   return (
-    <div className="w-full min-w-[calc(100vw-200px)] flex flex-col  items-center ">
+    <div className="w-full h-full md:pb-0 pb-[70px] flex flex-col  items-center ">
       <div className="relative w-full border-b px-4 py-4">
         <span className="flex items-center gap-2 text-black text-base">
           <Link to={"/"}>
@@ -147,20 +153,24 @@ export default function PostPage() {
           userID={UserData?._id}
         />
       )}
-      <div className="w-full">
-        {postcomments && postcomments?.length > 0 ? (
-          postcomments?.map((com, i) => (
-            <div key={i} className="w-full p-4 flex gap-2 items-center ">
-              <Link to={`/profile/${com.commentor._id}`}>
-                <Badge className="text-[10px]">{`${com.commentor.firstname} ${com.commentor.lastname}`}</Badge>
-              </Link>
-              <p>{com.comment}</p>
-            </div>
-          ))
-        ) : (
-          <h1 className="p-4 text-red-500 font-bold">No comments...</h1>
-        )}
-      </div>
+      {loading ? (
+        <Loader2 className="animate-spin m-4" />
+      ) : (
+        <div className="w-full h-full flex flex-col overflow-y-scroll">
+          {postcomments && postcomments?.length > 0 ? (
+            postcomments?.map((com, i) => (
+              <div key={i} className=" p-4 flex gap-2 items-center">
+                <Link to={`/profile/${com.commentor._id}`}>
+                  <Badge className="text-[10px]">{`${com.commentor.firstname} ${com.commentor.lastname}`}</Badge>
+                </Link>
+                <p>{com.comment}</p>
+              </div>
+            ))
+          ) : (
+            <h1 className="p-4 text-red-500 font-bold">No comments...</h1>
+          )}
+        </div>
+      )}
     </div>
   );
 }

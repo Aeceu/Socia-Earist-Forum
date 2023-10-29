@@ -55,8 +55,20 @@ const HandleLogin = async (req, res) => {
 };
 
 const HandleRegister = async (req, res) => {
-  const { data, file } = req.body;
+  const { data } = req.body;
   try {
+    if (
+      !data.email ||
+      !data.password ||
+      !data.firstname ||
+      !data.lastname ||
+      !data.password
+    ) {
+      return res.status(500).json({
+        success: false,
+        error: "Fill up all the input field!",
+      });
+    }
     const user = await Users.findOne({ studentID: data.studentID });
     // check if email already registered
     if (user) {

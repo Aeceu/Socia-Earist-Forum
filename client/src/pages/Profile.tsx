@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { DataStore } from "../state/DataStore";
 import { Badge } from "../components/ui/badge";
 import {
+  Loader2,
   LucideChevronLeftCircle,
   LucideContact2,
   LucideLoader2,
@@ -19,6 +20,7 @@ import toast from "react-hot-toast";
 import EditProfile from "../components/EditProfile";
 import { categories } from "../lib/categories";
 import PostCard from "../components/PostCard";
+import AuthStore from "../state/AuthStore";
 
 type DataDetails = {
   _id: string;
@@ -44,19 +46,29 @@ export default function Profile() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
+  const [loading1, setLoading1] = useState(false);
   const user = DataStore((state) => state.user);
   const getUser = DataStore((state) => state.getUser);
   const UserPosts = DataStore((state) => state.UserPosts);
   const getUserPosts = DataStore((state) => state.getUserPosts);
   const UserData = DataStore((state) => state.UserData);
+  const setToken = AuthStore((state) => state.setToken);
+  const setID = AuthStore((state) => state.setID);
   const [category, setCategory] = useState("");
   const [fillteredData, setFillteredData] = useState<PostDetails[] | null>(
     null
   );
   useEffect(() => {
-    if (id) {
-      getUser(id);
-      getUserPosts(id);
+    try {
+      setLoading1(true);
+      if (id) {
+        getUser(id);
+        getUserPosts(id);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading1(false);
     }
   }, [getUser, getUserPosts, id]);
 
@@ -73,7 +85,9 @@ export default function Profile() {
       setLoading(true);
       const res = await axios.delete(`${baseUrl}/user/${user?._id}`);
       toast.success(res.data.message);
-      navigate("/");
+      setID("");
+      setToken("");
+      navigate("/login");
     } catch (error) {
       console.error(error);
     } finally {
@@ -82,7 +96,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
+    <div className="w-full h-full md:pb-0 pb-[70px] flex flex-col  items-center ">
       <div className="relative w-full border-b px-4 py-4 flex flex-col">
         {UserData?._id === user?._id && (
           <div className="absolute right-3 top-3 z-50">
@@ -151,20 +165,31 @@ export default function Profile() {
           </Badge>
         ))}
       </div>
-      <div className="w-full max-h-screen  overflow-y-scroll flex flex-col">
-        {!category ? (
-          UserPosts &&
-          UserPosts.map((post, i) => (
-            <PostCard key={i} data={post} setCategory={setCategory} />
-          ))
-        ) : fillteredData && fillteredData?.length > 0 ? (
-          fillteredData.map((post, i) => (
-            <PostCard key={i} data={post} setCategory={setCategory} />
-          ))
-        ) : (
-          <h1 className="text-sm text-red-500 p-4">Empty...</h1>
-        )}
-      </div>
+      {loading1 ? (
+        <Loader2 className="animate-spin" />
+      ) : (
+        <div className="w-full h-full grid overflow-y-scroll">
+          {!category ? (
+            UserPosts && UserPosts?.length > 0 ? (
+              UserPosts.map((post, i) => (
+                <PostCard key={i} data={post} setCategory={setCategory} />
+              ))
+            ) : (
+              <span className="text-red-500 font-bold p-4">
+                No post available....
+              </span>
+            )
+          ) : fillteredData && fillteredData?.length > 0 ? (
+            fillteredData.map((post, i) => (
+              <PostCard key={i} data={post} setCategory={setCategory} />
+            ))
+          ) : (
+            <span className="text-red-500 font-bold p-4">
+              No post available....
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 }

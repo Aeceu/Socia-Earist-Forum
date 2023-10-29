@@ -82,8 +82,6 @@ export const DataStore = create<Props>()((set, get) => ({
     try {
       get().setLoading(true);
       const res = await axios.get(`${baseUrl}/userposts/${id}`);
-      console.log(res.data);
-
       set({ UserPosts: res.data.userposts });
     } catch (error) {
       console.error(error);

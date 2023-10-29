@@ -4,6 +4,7 @@ import { Badge } from "../components/ui/badge";
 import { categories } from "../lib/categories";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
+import { Loader2 } from "lucide-react";
 
 type DataDetails = {
   _id: string;
@@ -25,6 +26,7 @@ type PostDetails = {
   creator: DataDetails;
 };
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const UserData = DataStore((state) => state.UserData);
   const getUserData = DataStore((state) => state.getUserData);
   const AllPosts = DataStore((state) => state.AllPosts);
@@ -35,8 +37,15 @@ export default function Home() {
   );
 
   useEffect(() => {
-    getUserData();
-    getAllPosts();
+    try {
+      setLoading(true);
+      getUserData();
+      getAllPosts();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   }, [getAllPosts, getUserData]);
 
   useEffect(() => {
@@ -46,9 +55,9 @@ export default function Home() {
   }, [AllPosts, category]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center">
+    <div className="w-full h-full md:pb-0 pb-[70px] flex flex-col  items-center ">
       {<CreatePost userID={UserData?._id} />}
-      <div className="w-full p-4 flex items-center gap-2 border-y overflow-y-hidden overflow-x-scroll scroll-design">
+      <div className="w-full p-2 flex items-center justify-center gap-2 border-y ">
         <Badge
           onClick={() => setCategory("")}
           className={`cursor-pointer ${
@@ -69,20 +78,34 @@ export default function Home() {
           </Badge>
         ))}
       </div>
-      <div className="w-full max-h-screen md:p-0 pb-[250px] overflow-y-scroll flex flex-col-reverse  ">
-        {!category ? (
-          AllPosts &&
-          AllPosts.map((post, i) => (
-            <PostCard key={i} data={post} setCategory={setCategory} />
-          ))
-        ) : fillteredData && fillteredData?.length > 0 ? (
-          fillteredData.map((post, i) => (
-            <PostCard key={i} data={post} setCategory={setCategory} />
-          ))
-        ) : (
-          <h1 className="text-sm text-red-500 p-4">Empty...</h1>
-        )}
-      </div>
+      {loading ? (
+        <Loader2 className="animate-spin" />
+      ) : (
+        <div className="w-full h-full grid overflow-y-scroll">
+          {!category ? (
+            AllPosts &&
+            AllPosts.map((post, i) => (
+              <PostCard
+                key={i}
+                data={post}
+                setCategory={setCategory}
+                userID={UserData?._id}
+              />
+            ))
+          ) : fillteredData && fillteredData?.length > 0 ? (
+            fillteredData.map((post, i) => (
+              <PostCard
+                key={i}
+                data={post}
+                setCategory={setCategory}
+                userID={UserData?._id}
+              />
+            ))
+          ) : (
+            <h1 className="text-sm text-red-500 p-4">Empty...</h1>
+          )}
+        </div>
+      )}
     </div>
   );
 }

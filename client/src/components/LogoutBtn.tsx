@@ -29,8 +29,7 @@ export default function LogoutBtn({ minimize }: { minimize: boolean }) {
       type="button"
       className={`${
         minimize && "justify-center"
-      } flex gap-2 items-center px-2 py-1.5 text-sm border-2 text-white bg-red-500 rounded-md border-yellow-300
-      hover:bg-yellow-300 hover:text-red-500 hover:border-red-500 `}
+      } flex gap-2 items-center px-2 py-1.5 text-sm  border-2 rounded-md border-black text-black`}
     >
       {loading ? (
         <span className="flex gap-2 items-center justify-center w-full">
