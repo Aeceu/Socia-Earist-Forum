@@ -57,7 +57,7 @@ export default function Home() {
   return (
     <div className="w-full h-full md:pb-0 pb-[70px] flex flex-col  items-center ">
       {<CreatePost userID={UserData?._id} />}
-      <div className="w-full p-2 flex items-center justify-center gap-2 border-y ">
+      <div className="w-full p-4 flex items-center gap-2 border-y overflow-y-hidden overflow-x-scroll scroll-design">
         <Badge
           onClick={() => setCategory("")}
           className={`cursor-pointer ${
@@ -81,7 +81,7 @@ export default function Home() {
       {loading ? (
         <Loader2 className="animate-spin" />
       ) : (
-        <div className="w-full h-full grid overflow-y-scroll">
+        <div className="w-full h-full flex flex-col overflow-y-scroll">
           {!category ? (
             AllPosts &&
             AllPosts.map((post, i) => (

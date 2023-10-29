@@ -168,7 +168,7 @@ export default function Profile() {
       {loading1 ? (
         <Loader2 className="animate-spin" />
       ) : (
-        <div className="w-full h-full grid overflow-y-scroll">
+        <div className="w-full h-full flex flex-col overflow-y-scroll">
           {!category ? (
             UserPosts && UserPosts?.length > 0 ? (
               UserPosts.map((post, i) => (
