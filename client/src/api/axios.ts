@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:4200",
+  baseURL: "https://socia-earist-forum-backend.vercel.app",
   withCredentials: true,
 });
