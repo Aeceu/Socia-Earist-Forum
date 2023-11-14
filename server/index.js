@@ -14,7 +14,7 @@ const app = express();
 connectDB();
 
 const corsConfig = {
-  origin: "https://lsocia-earist-forum.vercel.app",
+  origin: "https://social-earist-forum.vercel.app",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };
