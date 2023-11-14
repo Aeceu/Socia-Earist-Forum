@@ -1,39 +1,14 @@
-import axios from "axios";
+import axios from "../api/axios";
 import { create } from "zustand";
-
-type DataDetails = {
-  _id: string;
-  studentID: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  createdAt: string;
-};
-
-type commentProps = {
-  _id: string;
-  commentor: DataDetails;
-  comment: string;
-};
-
-type PostDetails = {
-  _id: string;
-  title: string;
-  description: string;
-  likes: [string];
-  category: string;
-  createdAt: string;
-  creator: DataDetails;
-};
+import { PostDetails, UserDetails, commentProps } from "../props";
 
 type Props = {
-  UserData: DataDetails | null;
+  UserData: UserDetails | null;
   AllPosts: PostDetails[] | null;
   UserPosts: PostDetails[] | null;
   loading: boolean;
   post: PostDetails | null;
-  user: DataDetails | null;
+  user: UserDetails | null;
   postcomments: commentProps[] | null;
   getAllComments: (postID: string) => Promise<void>;
   getUser: (id: string) => Promise<void>;
@@ -43,8 +18,6 @@ type Props = {
   setLoading: (state: boolean) => void;
   getUserData: () => Promise<void>;
 };
-
-const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
 export const DataStore = create<Props>()((set, get) => ({
   UserData: null,
@@ -56,7 +29,7 @@ export const DataStore = create<Props>()((set, get) => ({
   postcomments: null,
   getAllComments: async (postID: string) => {
     try {
-      const res = await axios.get(`${baseUrl}/comment/${postID}`);
+      const res = await axios.get(`/comment/${postID}`);
       set({ postcomments: res.data.comments });
     } catch (error) {
       console.error(error);
@@ -64,7 +37,7 @@ export const DataStore = create<Props>()((set, get) => ({
   },
   getUser: async (id: string) => {
     try {
-      const res = await axios.get(`${baseUrl}/user/${id}`);
+      const res = await axios.get(`/user/${id}`);
       set({ user: res.data.data });
     } catch (error) {
       console.error(error);
@@ -72,7 +45,7 @@ export const DataStore = create<Props>()((set, get) => ({
   },
   getPost: async (id: string) => {
     try {
-      const res = await axios.get(`${baseUrl}/post/${id}`);
+      const res = await axios.get(`/post/${id}`);
       set({ post: res.data.post });
     } catch (error) {
       console.error(error);
@@ -81,7 +54,7 @@ export const DataStore = create<Props>()((set, get) => ({
   getUserPosts: async (id: string) => {
     try {
       get().setLoading(true);
-      const res = await axios.get(`${baseUrl}/userposts/${id}`);
+      const res = await axios.get(`/userposts/${id}`);
       set({ UserPosts: res.data.userposts });
     } catch (error) {
       console.error(error);
@@ -92,7 +65,7 @@ export const DataStore = create<Props>()((set, get) => ({
   getAllPosts: async () => {
     try {
       get().setLoading(true);
-      const res = await axios.get(`${baseUrl}/post`);
+      const res = await axios.get(`/post`);
       set({ AllPosts: res.data.posts });
     } catch (error) {
       console.error(error);
@@ -106,7 +79,7 @@ export const DataStore = create<Props>()((set, get) => ({
   getUserData: async () => {
     try {
       get().setLoading(true);
-      const res = await axios.get(`${baseUrl}/userdata`);
+      const res = await axios.get(`/userdata`);
       set({ UserData: res.data.data });
     } catch (error) {
       console.error(error);

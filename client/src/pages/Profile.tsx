@@ -15,32 +15,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
-import axios from "axios";
+import axios from "../api/axios";
 import toast from "react-hot-toast";
 import EditProfile from "../components/EditProfile";
 import { categories } from "../lib/categories";
 import PostCard from "../components/PostCard";
 import AuthStore from "../state/AuthStore";
-
-type DataDetails = {
-  _id: string;
-  studentID: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  createdAt: string;
-};
-
-type PostDetails = {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  createdAt: string;
-  creator: DataDetails;
-  likes: [string];
-};
+import { PostDetails } from "../props";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -78,12 +59,10 @@ export default function Profile() {
     }
   }, [UserPosts, category]);
 
-  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
-
   const handleDelete = async () => {
     try {
       setLoading(true);
-      const res = await axios.delete(`${baseUrl}/user/${user?._id}`);
+      const res = await axios.delete(`/user/${user?._id}`);
       toast.success(res.data.message);
       setID("");
       setToken("");

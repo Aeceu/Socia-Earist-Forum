@@ -1,5 +1,5 @@
 import { DataStore } from "../state/DataStore";
-import axios from "axios";
+import axios from "../api/axios";
 import { LucideHeart } from "lucide-react";
 
 type Props = {
@@ -16,11 +16,10 @@ export default function LikesTab({
   likeCount,
 }: Props) {
   const UserData = DataStore((state) => state.UserData);
-  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
   const handleLike = async () => {
     try {
-      await axios.post(`${baseUrl}/like/${id}`, {
+      await axios.post(`/like/${id}`, {
         likerID: UserData?._id,
       });
 

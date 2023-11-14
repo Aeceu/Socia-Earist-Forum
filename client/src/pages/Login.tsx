@@ -6,8 +6,9 @@ export default function page() {
     <div className="relative min-h-screen flex ">
       <AuthInfo />
       <div
-        className="w-full md:w-1/2 md:justify-start flex flex-col gap-8  items-center p-4
-       bg-[url(/bg.jpg)] md:bg-none md:bg-[#fff] bg-no-repeat  bg-cover"
+        className="w-full md:w-1/2 md:justify-center flex flex-col gap-8  items-center p-4
+       bg-[url(/bg.jpg)] md:bg-none md:bg-[#fff] bg-no-repeat  bg-cover 
+       "
       >
         <img
           src="/uni.jpg"
@@ -24,7 +25,7 @@ export default function page() {
             <h1 className="text-4xl md:text-6xl text-yellow-400 font-bold drop-shadow-[3px_3px_0px_rgba(177,1,1,1)]">
               EARIST
             </h1>
-            <p className="pb-4 text-sm md:text-base  md:text-[rgb(177,1,1)] md:drop-shadow-[3px_3px_0px_rgba(250,204,21,.8)] text-yellow-400 font-bold drop-shadow-[3px_3px_0px_rgba(177,1,1,.8)]">
+            <p className="pb-4 text-sm md:text-lg  md:text-[rgb(177,1,1)] md:drop-shadow-[3px_3px_0px_rgba(250,204,21,.8)] text-yellow-400 font-bold drop-shadow-[3px_3px_0px_rgba(177,1,1,.8)]">
               Eulogio Amang Rodriguez Institute of Science and Technology
             </p>
           </span>

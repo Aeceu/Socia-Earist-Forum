@@ -10,15 +10,14 @@ import { DataStore } from "../state/DataStore";
 import { useState, useEffect } from "react";
 
 import { LucideLoader2 } from "lucide-react";
-import toast from "react-hot-toast";
-import axios from "axios";
+import { PostStore } from "../helpers/PostHelpers";
 
 export default function EditProfile() {
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
   const user = DataStore((state) => state.user);
   const getUser = DataStore((state) => state.getUser);
-
+  const handleUpdateProfile = PostStore((state) => state.handleUpdateProfile);
   const [data, setData] = useState({
     studentID: "",
     firstname: "",
@@ -36,28 +35,6 @@ export default function EditProfile() {
       });
     }
   }, [user]);
-
-  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
-
-  const handleUpdate = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.patch(`${baseUrl}/user/${user?._id}`, { data });
-      toast.success(res.data.message);
-      if (user) getUser(user?._id);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-      setToggle(false);
-      setData({
-        studentID: "",
-        firstname: "",
-        lastname: "",
-        email: "",
-      });
-    }
-  };
 
   return (
     <Dialog open={toggle}>
@@ -155,7 +132,17 @@ export default function EditProfile() {
                 Cancel
               </button>
               <button
-                onClick={handleUpdate}
+                onClick={() =>
+                  handleUpdateProfile({
+                    data,
+                    setData,
+                    setLoading,
+                    setToggle,
+                    userID: user?._id,
+                  }).then((success) => {
+                    success && user && getUser(user?._id);
+                  })
+                }
                 disabled={loading}
                 type="button"
                 className="text-emerald-500"

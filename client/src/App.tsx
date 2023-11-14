@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import axios from "axios";
 import Layout from "./Layout";
 import Home from "./pages/Home";
 import PostPage from "./pages/PostPage";
@@ -7,10 +6,9 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { ProtectedRoutes, PublicRoutes } from "./lib/ProtectedRoutes";
+import CreatePostPage from "./pages/CreatePostPage";
 
 const App = () => {
-  axios.defaults.baseURL = "https://socia-earist-forum-backend.vercel.app";
-  axios.defaults.withCredentials = true;
   return (
     <Routes>
       {/* private routes */}
@@ -19,6 +17,7 @@ const App = () => {
           <Route index element={<Home />} />
           <Route path="post/:id" element={<PostPage />} />
           <Route path="profile/:id" element={<Profile />} />
+          <Route path="createpost/:id" element={<CreatePostPage />} />
         </Route>
       </Route>
       {/* public routes */}

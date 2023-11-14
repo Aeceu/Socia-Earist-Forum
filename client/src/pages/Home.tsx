@@ -2,29 +2,10 @@ import { useEffect, useState } from "react";
 import { DataStore } from "../state/DataStore";
 import { Badge } from "../components/ui/badge";
 import { categories } from "../lib/categories";
-import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
 import { Loader2 } from "lucide-react";
+import { PostDetails } from "../props";
 
-type DataDetails = {
-  _id: string;
-  studentID: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  createdAt: string;
-};
-
-type PostDetails = {
-  _id: string;
-  likes: [string];
-  title: string;
-  description: string;
-  category: string;
-  createdAt: string;
-  creator: DataDetails;
-};
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const UserData = DataStore((state) => state.UserData);
@@ -56,7 +37,7 @@ export default function Home() {
 
   return (
     <div className="w-full h-full md:pb-0 pb-[70px] flex flex-col  items-center ">
-      {<CreatePost userID={UserData?._id} />}
+      {/* {<CreatePost userID={UserData?._id} />} */}
       <div className="w-full p-4 flex items-center gap-2 border-y overflow-y-hidden overflow-x-scroll scroll-design">
         <Badge
           onClick={() => setCategory("")}

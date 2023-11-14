@@ -6,7 +6,6 @@ const PostRouter = require("./routers/PostRoute");
 const CommentRouter = require("./routers/CommentRouter");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
-``;
 const cookieParser = require("cookie-parser");
 dotenv.config();
 
@@ -15,7 +14,7 @@ const app = express();
 connectDB();
 
 const corsConfig = {
-  origin: "https://socia-earist-forum.vercel.app",
+  origin: "http://localhost:5173",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };

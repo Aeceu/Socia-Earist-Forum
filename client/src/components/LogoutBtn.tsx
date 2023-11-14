@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 import AuthStore from "../state/AuthStore";
 import { LucideLoader2, LucideLogOut } from "lucide-react";
@@ -12,8 +12,7 @@ export default function LogoutBtn({ minimize }: { minimize: boolean }) {
   const handleLogout = async () => {
     try {
       setLoading(true);
-      const baseUrl = "https://socia-earist-forum-backend.vercel.app";
-      await axios.get(`${baseUrl}/logout`);
+      await axios.get(`/logout`);
       setID("");
       setToken("");
       navigate("/login");
@@ -29,7 +28,7 @@ export default function LogoutBtn({ minimize }: { minimize: boolean }) {
       type="button"
       className={`${
         minimize && "justify-center"
-      } flex gap-2 items-center px-2 py-1.5 text-sm  border-2 rounded-md border-black text-black`}
+      } flex gap-2 items-center px-2 py-1.5 text-sm font-bold shadow-inner rounded-md bg-amber-500 shadow-yellow-900`}
     >
       {loading ? (
         <span className="flex gap-2 items-center justify-center w-full">

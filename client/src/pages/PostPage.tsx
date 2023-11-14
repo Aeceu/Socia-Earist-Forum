@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Badge } from "../components/ui/badge";
 import { DataStore } from "../state/DataStore";
@@ -17,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "../components/ui/dropdown-menu";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axios from "../api/axios";
 import EditPopOver from "../components/EditPopOver";
 import LikesTab from "../components/LikesTab";
 import CreateComment from "../components/CreateComment";
@@ -35,11 +34,11 @@ export default function PostPage() {
   const postcomments = DataStore((state) => state.postcomments);
   const getAllComments = DataStore((state) => state.getAllComments);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
+
   const handleDelete = async () => {
     try {
       setLoading(true);
-      const res = await axios.delete(`${baseUrl}/post/${post?._id}`);
+      const res = await axios.delete(`/post/${post?._id}`);
       toast.success(res.data.message);
       navigate("/");
     } catch (error) {
@@ -75,7 +74,7 @@ export default function PostPage() {
 
   const fetchLikes = async () => {
     try {
-      const res = await axios.post(`${baseUrl}/like`, {
+      const res = await axios.post(`/like`, {
         userID: UserData?._id,
         postID: id,
       });
@@ -159,7 +158,10 @@ export default function PostPage() {
         <div className="w-full h-full flex flex-col overflow-y-scroll">
           {postcomments && postcomments?.length > 0 ? (
             postcomments?.map((com, i) => (
-              <div key={i} className=" p-4 flex gap-2 items-center">
+              <div
+                key={i}
+                className=" p-4 flex gap-2 items-center md:text-base text-sm"
+              >
                 <Link to={`/profile/${com.commentor._id}`}>
                   <Badge className="text-[10px]">{`${com.commentor.firstname} ${com.commentor.lastname}`}</Badge>
                 </Link>

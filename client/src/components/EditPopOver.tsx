@@ -17,15 +17,15 @@ import {
   SelectValue,
 } from "../components/ui/select";
 import { LucideLoader2 } from "lucide-react";
-import toast from "react-hot-toast";
-import axios from "axios";
 import { categories } from "../lib/categories";
+import { PostStore } from "../helpers/PostHelpers";
 
 export default function EditPopOver() {
   const [loading, setLoading] = useState(false);
   const [toggle, setToggle] = useState(false);
   const post = DataStore((state) => state.post);
   const getPost = DataStore((state) => state.getPost);
+  const handleUpdatePost = PostStore((state) => state.handleUpdatePost);
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -43,27 +43,6 @@ export default function EditPopOver() {
       });
     }
   }, [post]);
-
-  const baseUrl = "https://socia-earist-forum-backend.vercel.app";
-
-  const handleUpdate = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.patch(`${baseUrl}/post/${post?._id}`, { data });
-      toast.success(res.data.message);
-      if (post) getPost(post?._id.toString());
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-      setToggle(false);
-      setData({
-        title: "",
-        description: "",
-        category: "",
-      });
-    }
-  };
 
   return (
     <Dialog open={toggle}>
@@ -123,7 +102,17 @@ export default function EditPopOver() {
                 Cancel
               </button>
               <button
-                onClick={handleUpdate}
+                onClick={() =>
+                  handleUpdatePost({
+                    data,
+                    postID: post?._id,
+                    setData,
+                    setLoading,
+                    setToggle,
+                  }).then((success) => {
+                    success && post?._id && getPost(post?._id);
+                  })
+                }
                 disabled={loading}
                 type="button"
                 className="text-emerald-500"

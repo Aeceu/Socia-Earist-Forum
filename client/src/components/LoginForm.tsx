@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "../api/axios";
 import toast from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
 import {
@@ -10,8 +10,6 @@ import {
   LucideUserCircle2,
 } from "lucide-react";
 import AuthStore from "../state/AuthStore";
-
-const baseUrl = "https://socia-earist-forum-backend.vercel.app";
 
 export default function LoginForm() {
   const [show, setShow] = useState(false);
@@ -29,7 +27,7 @@ export default function LoginForm() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(`${baseUrl}/login`, { data });
+      const res = await axios.post(`/login`, { data });
       toast.success(res.data.message);
       setToken(res.data.token);
       setID(res.data.id);
@@ -122,7 +120,7 @@ export default function LoginForm() {
       <button
         disabled={loading}
         type="submit"
-        className="mt-4 bg-red-600 text-white flex gap-2 items-center justify-center px-2 py-1.5 text-sm border-2   rounded-md "
+        className="font-bold mt-4 bg-red-600 shadow-inner shadow-red-900 text-white flex gap-2 items-center justify-center px-2 py-1.5 text-sm border-2   rounded-md "
       >
         {loading ? (
           <span className="flex gap-2 items-center">
@@ -142,7 +140,7 @@ export default function LoginForm() {
       </span>
       <Link
         to="/register"
-        className="bg-red-600 text-white flex gap-2 items-center justify-center px-2 py-1.5 text-sm border-2  rounded-md "
+        className="font-bold  bg-red-600 shadow-inner shadow-red-900 text-white flex gap-2 items-center justify-center px-2 py-1.5 text-sm border-2  rounded-md "
       >
         Create an account
       </Link>

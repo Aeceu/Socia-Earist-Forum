@@ -2,23 +2,8 @@ import { Link } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
 import { Badge } from "./ui/badge";
 import { LucideHeart } from "lucide-react";
+import { PostDetails } from "../props";
 
-type DataDetails = {
-  _id: string;
-  studentID: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-};
-type PostDetails = {
-  _id: string;
-  title: string;
-  likes: [string];
-  description: string;
-  category: string;
-  creator: DataDetails;
-};
 type Props = {
   data: PostDetails;
   setCategory: Dispatch<SetStateAction<string>>;
@@ -52,14 +37,14 @@ export default function PostCard({ data, setCategory, userID }: Props) {
         </p>
       </Link>
       <span
-        className={`w-max  flex items-center gap-1 px-2 ${
+        className={`w-max flex items-center gap-1 px-2 ${
           data.likes.some((like) => like === userID)
             ? "text-red-500"
             : "text-black"
         }`}
       >
         <h1 className="text-sm">{data.likes.length}</h1>
-        <LucideHeart size="1rem" />
+        <LucideHeart size=".7rem" />
       </span>
     </div>
   );
