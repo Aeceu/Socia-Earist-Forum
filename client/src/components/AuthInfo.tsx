@@ -6,7 +6,11 @@ export default function AuthInfo() {
         src={"/uni.jpg"}
         className="absolute w-full h-full opacity-20"
       />
-      <img src="/earist-logo.png" alt="logo" className="w-[500px] opacity-70" />
+      <img
+        src="/earist-logo.png"
+        alt="logo"
+        className="w-[500px] opacity-70 animate-[spin_20s_linear_infinite]"
+      />
     </div>
   );
 }

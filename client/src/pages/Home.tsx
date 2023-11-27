@@ -17,7 +17,13 @@ export default function Home() {
     null
   );
 
+  const getCookie = () => {
+    const cookies = document.cookie.split(";");
+    return cookies;
+  };
   useEffect(() => {
+    const token = getCookie();
+    console.log(token);
     try {
       setLoading(true);
       getUserData();

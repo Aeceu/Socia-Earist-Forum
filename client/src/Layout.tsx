@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
-import SearchTab from "./components/SearchTab";
 
 export default function Layout() {
   return (
@@ -10,7 +9,6 @@ export default function Layout() {
       <div className="flex h-[calc(100vh-80px)]  md:flex-row flex-col-reverse">
         <SideBar />
         <Outlet />
-        <SearchTab />
       </div>
     </div>
   );

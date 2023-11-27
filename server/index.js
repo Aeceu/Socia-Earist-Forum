@@ -13,8 +13,11 @@ const app = express();
 
 connectDB();
 
+const localhost = "http://localhost:5173";
+const deployed = "https://social-earist-forum.vercel.app";
+
 const corsConfig = {
-  origin: "https://social-earist-forum.vercel.app",
+  origin: deployed,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };

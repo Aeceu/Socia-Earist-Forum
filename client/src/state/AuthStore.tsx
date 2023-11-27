@@ -4,8 +4,8 @@ import { persist } from "zustand/middleware";
 type Props = {
   userID: string | null;
   tokenID: string | null;
-  setToken: (id: string | null) => void;
-  setID: (id: string | null) => void;
+  setToken: (id: string) => void;
+  setID: (id: string) => void;
 };
 
 const AuthStore = create<Props>()(
