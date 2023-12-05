@@ -13,7 +13,7 @@ const createToken = (id) => {
 
 const HandleLogin = async (req, res) => {
   try {
-    const { data } = req.body;
+    const {} = req.body;
     const user = await Users.findOne({ studentID: data.studentID });
     if (!user) {
       return res.status(500).json({
@@ -55,34 +55,35 @@ const HandleLogin = async (req, res) => {
 };
 
 const HandleRegister = async (req, res) => {
-  const { data } = req.body;
+  const { email, password, firstname, lastname, studentID } = req.body;
   try {
     if (
-      !data.email ||
-      !data.password ||
-      !data.firstname ||
-      !data.lastname ||
-      !data.password
+      !email ||
+      !password ||
+      !firstname ||
+      !lastname ||
+      !password ||
+      !studentID
     ) {
       return res.status(500).json({
         success: false,
         error: "Fill up all the input field!",
       });
     }
-    const user = await Users.findOne({ studentID: data.studentID });
+    const user = await Users.findOne({ studentID });
     // check if email already registered
     if (user) {
       return res.status(500).json({
         success: false,
-        message: "Student number already used!",
+        message: "Student number already registered!",
       });
     }
-    const hashPassword = await bcrypt.hash(data.password, 10);
+    const hashPassword = await bcrypt.hash(password, 10);
     const newUser = new Users({
-      studentID: data.studentID,
-      firstname: data.firstname,
-      lastname: data.lastname,
-      email: data.email,
+      studentID: studentID,
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
       password: hashPassword,
     });
     await newUser.save();

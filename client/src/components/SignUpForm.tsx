@@ -26,12 +26,18 @@ export default function SignUpForm() {
     e.preventDefault();
     try {
       setLoading(true);
-      const res = await axios.post(`/register`, { data });
+      const res = await axios.post(`/register`, {
+        studentID: data.studentID,
+        firstname: data.firstname,
+        lastname: data.lastname,
+        email: data.email,
+        password: data.password,
+      });
       toast.success(res.data.message);
       router("/login");
     } catch (error: any) {
       console.error(error);
-      toast.error(error.response.data.error);
+      toast.error(error.response.data.message);
       console.log(error);
     } finally {
       setLoading(false);
