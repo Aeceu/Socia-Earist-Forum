@@ -70,7 +70,7 @@ const HandleRegister = async (req, res) => {
         error: "Fill up all the input field!",
       });
     }
-    const user = await Users.findOne({ studentID });
+    const user = await Users.findOne({ studentID: studentID });
     // check if email already registered
     if (user) {
       return res.status(500).json({
@@ -79,7 +79,7 @@ const HandleRegister = async (req, res) => {
       });
     }
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new Users({
+    const newUser = new Users.create({
       studentID: studentID,
       firstname: firstname,
       lastname: lastname,
