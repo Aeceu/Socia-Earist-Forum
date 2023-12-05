@@ -79,14 +79,14 @@ const HandleRegister = async (req, res) => {
       });
     }
     const hashPassword = await bcrypt.hash(password, 10);
-    const newUser = new Users.create({
+    await Users.create({
       studentID: studentID,
       firstname: firstname,
       lastname: lastname,
       email: email,
       password: hashPassword,
     });
-    await newUser.save();
+    // await newUser.save();
     return res.status(200).json({
       success: true,
       message: "User registered!",
