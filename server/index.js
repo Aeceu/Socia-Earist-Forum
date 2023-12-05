@@ -19,14 +19,14 @@ const deployed = "https://social-earist-forum.vercel.app";
 const corsConfig = {
   origin: deployed,
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
+  // allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(express.json());
 app.use(cors(corsConfig));
 app.use(cookieParser());
-app.options("*", cors(corsConfig));
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// app.options("*", cors(corsConfig));
+// app.use(helmet());
+// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use("/", UserRouter);
 app.use("/", PostRouter);
 app.use("/", CommentRouter);
