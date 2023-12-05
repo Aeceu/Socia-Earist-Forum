@@ -96,7 +96,7 @@ const HandleRegister = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "An error occurred while registering the user.",
-      error: error.message, // Include the actual error message for debugging
+      error: error.message,
     });
   }
 };
