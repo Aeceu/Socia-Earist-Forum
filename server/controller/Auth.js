@@ -13,7 +13,7 @@ const createToken = (id) => {
 
 const HandleLogin = async (req, res) => {
   try {
-    const {} = req.body;
+    const {data} = req.body;
     const user = await Users.findOne({ studentID: data.studentID });
     if (!user) {
       return res.status(500).json({
