@@ -13,7 +13,7 @@ const app = express();
 
 connectDB();
 
-const localhost = "http://localhost:5173";
+// const localhost = "http://localhost:5173";
 const deployed = "https://social-earists-forum.vercel.app";
 
 const corsConfig = {
