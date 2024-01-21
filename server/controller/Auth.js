@@ -13,7 +13,7 @@ const createToken = (id) => {
 
 const HandleLogin = async (req, res) => {
   try {
-    const {data} = req.body;
+    const { data } = req.body;
     const user = await Users.findOne({ studentID: data.studentID });
     if (!user) {
       return res.status(500).json({
@@ -79,14 +79,14 @@ const HandleRegister = async (req, res) => {
       });
     }
     const hashPassword = await bcrypt.hash(password, 10);
-    await Users.create({
+    const newUser = await new Users({
       studentID: studentID,
       firstname: firstname,
       lastname: lastname,
       email: email,
       password: hashPassword,
     });
-    // await newUser.save();
+    await newUser.save();
     return res.status(200).json({
       success: true,
       message: "User registered!",

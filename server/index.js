@@ -14,13 +14,14 @@ const app = express();
 connectDB();
 
 const localhost = "http://localhost:5173";
-const deployed = "https://social-earist-forum.vercel.app";
+const deployed = "https://social-earists-forum.vercel.app";
 
 const corsConfig = {
   origin: deployed,
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };
+
 app.use(express.json());
 app.use(cors(corsConfig));
 app.use(cookieParser());
