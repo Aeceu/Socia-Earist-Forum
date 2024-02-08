@@ -13,21 +13,18 @@ const app = express();
 
 connectDB();
 
-// const localhost = "http://localhost:5173";
+const localhost = "http://localhost:5173";
 const deployed = "https://social-earists-forum.vercel.app";
 
-const corsConfig = {
-  origin: deployed,
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
 app.use(express.json());
-app.use(cors(corsConfig));
+app.use(
+  cors({
+    origin: deployed,
+    credentials: true,
+  })
+);
 app.use(cookieParser());
-app.options("*", cors(corsConfig));
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+
 app.use("/", UserRouter);
 app.use("/", PostRouter);
 app.use("/", CommentRouter);
@@ -36,3 +33,5 @@ const PORT = 4200;
 app.listen(PORT, () => {
   console.log(`Server opened at PORT:${PORT} !`);
 });
+
+export default app;
