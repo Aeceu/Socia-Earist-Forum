@@ -14,7 +14,7 @@ const app = express();
 connectDB();
 
 const localhost = "http://localhost:5173";
-const deployed = "https://social-earists-forum.vercel.app";
+const deployed = "https://social-earist-forum.vercel.app";
 
 app.use(express.json());
 app.use(
@@ -34,4 +34,4 @@ app.listen(PORT, () => {
   console.log(`Server opened at PORT:${PORT} !`);
 });
 
-export default app;
+module.exports = app;
