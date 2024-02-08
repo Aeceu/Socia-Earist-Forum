@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const localhost = "http://localhost:4200";
-const deployed = "https://earist-forum.onrender.com";
+const deployed = "social-earist-forum-backend.vercel.app";
 
 export default axios.create({
   baseURL: deployed,
