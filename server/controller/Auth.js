@@ -70,7 +70,9 @@ const HandleRegister = async (req, res) => {
         error: "Fill up all the input field!",
       });
     }
+    console.log({ email, password, firstname, lastname, studentID });
     const user = await Users.findOne({ studentID: studentID });
+    console.log(user);
     // check if email already registered
     if (user) {
       return res.status(500).json({
